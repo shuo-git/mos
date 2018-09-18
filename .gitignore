@@ -102,3 +102,10 @@ ENV/
 
 # data
 data/
+
+# model
+PTB-20180918-104304/
+
+# scripts
+run_ptb.sh
+
