@@ -55,6 +55,20 @@ class Corpus(object):
 
         return ids
 
+    def tokenize_line(self, line):
+        words = line.split() + ['<eos>']
+        tokens = len(words)
+        for word in words:
+            self.dictionary.add_word(word)
+        ids = torch.LongTensor(tokens)
+        token = 0
+        for word in words:
+            ids[token] = self.dictionary.word2idx[word]
+            token += 1
+
+        return ids
+
+
 class SentCorpus(object):
     def __init__(self, path):
         self.dictionary = Dictionary()
