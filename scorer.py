@@ -176,7 +176,7 @@ def evaluate_line(line):
     seq_len = line_tensor.size(0)
     model.eval()
     hidden = model.init_hidden(1)
-    data, targets = get_batch(line_tensor, 0, args, evaluation=True)
+    data, targets = get_batch(line_tensor, 0, args, seq_len=seq_len, evaluation=True)
     targets = targets.view(-1)
     log_prob, hidden = parallel_model(data, hidden)
     loss = nn.functional.nll_loss(log_prob.view(-1, log_prob.size(2)), targets).data
@@ -322,12 +322,12 @@ parallel_model = nn.DataParallel(model, dim=1).cuda()
 
 # line = 'What is the weather like today ?'
 
-# line_loss = evaluate_line(line)
-# print('Line loss is {}'.format(line_loss))
+line_loss = evaluate_line(line)
+print('Line loss is {}'.format(line_loss))
 
 # Run on test data.
-test_loss = evaluate(test_data, test_batch_size)
-logging('=' * 89)
-logging('| End of training | test loss {:5.2f} | test ppl {:8.2f}'.format(
-    test_loss, math.exp(test_loss)))
-logging('=' * 89)
+# test_loss = evaluate(test_data, test_batch_size)
+# logging('=' * 89)
+# logging('| End of training | test loss {:5.2f} | test ppl {:8.2f}'.format(
+#     test_loss, math.exp(test_loss)))
+# logging('=' * 89)
