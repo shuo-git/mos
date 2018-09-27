@@ -328,7 +328,7 @@ parallel_model = nn.DataParallel(model, dim=1).cuda()
 #     test_loss, math.exp(test_loss)))
 # logging('=' * 89)
 
-line = "but while the new york stock exchange did n't fall apart friday "
+line = "but while the new york stock"
 line_loss = evaluate_line(line)
 print('Line loss is {}'.format(line_loss))
 
