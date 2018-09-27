@@ -160,7 +160,7 @@ def evaluate(data_source, batch_size=10):
     for i in range(0, data_source.size(0) - 1, args.bptt):
         data, targets = get_batch(data_source, i, args, evaluation=True)
         targets = targets.view(-1)
-        print('data size: {}'.format(data.size()))
+        print('data size: {} target size: {}'.format(data.size(), target.size()))
         log_prob, hidden = parallel_model(data, hidden)
         loss = nn.functional.nll_loss(log_prob.view(-1, log_prob.size(2)), targets).data
 
@@ -178,7 +178,7 @@ def evaluate_line(line):
     hidden = model.init_hidden(1)
     data, targets = get_batch(line_tensor, 0, args, seq_len=seq_len, evaluation=True)
     targets = targets.view(-1)
-    print('data size: {}'.format(data.size()))
+    print('data size: {} target size: {}'.format(data.size(), target.size()))
     log_prob, hidden = parallel_model(data, hidden)
     loss = nn.functional.nll_loss(log_prob.view(-1, log_prob.size(2)), targets).data
     return loss
