@@ -322,13 +322,13 @@ model = torch.load(os.path.join(args.save, 'model.pt'))
 parallel_model = nn.DataParallel(model, dim=1).cuda()
 
 # Run on test data.
-test_loss = evaluate(test_data, test_batch_size)
-logging('=' * 89)
-logging('| End of training | test loss {:5.2f} | test ppl {:8.2f}'.format(
-    test_loss, math.exp(test_loss)))
-logging('=' * 89)
+# test_loss = evaluate(test_data, test_batch_size)
+# logging('=' * 89)
+# logging('| End of training | test loss {:5.2f} | test ppl {:8.2f}'.format(
+#     test_loss, math.exp(test_loss)))
+# logging('=' * 89)
 
-line = "but while the new york stock exchange did n't fall apart friday as the dow jones industrial average plunged N points most of"
+line = "but while the new york stock exchange did n't fall apart friday "
 line_loss = evaluate_line(line)
 print('Line loss is {}'.format(line_loss))
 
