@@ -105,6 +105,7 @@ data/
 
 # model
 PTB-20180918-104304/
+ZH*/
 
 # scripts
 run_ptb.sh
